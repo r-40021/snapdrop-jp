@@ -9,7 +9,7 @@ window.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 Events.on('display-name', e => {
     const me = e.detail.message;
     const $displayName = $('displayName')
-    $displayName.textContent = 'You are known as ' + me.displayName;
+    $displayName.textContent = 'このデバイスの表示名: ' + me.displayName;
     $displayName.title = me.deviceName;
 });
 
@@ -74,7 +74,7 @@ class PeerUI {
 
     html() {
         return `
-            <label class="column center" title="Click to send files or right click to send a text">
+            <label class="column center" title="クリックでファイルを送信、右クリックでメッセージを送信">
                 <input type="file" multiple>
                 <x-icon shadow="1">
                     <svg class="icon"><use xlink:href="#"/></svg>
@@ -375,7 +375,7 @@ class ReceiveTextDialog extends Dialog {
 
     async _onCopy() {
         await navigator.clipboard.writeText(this.$text.textContent);
-        Events.fire('notify-user', 'Copied to clipboard');
+        Events.fire('notify-user', 'クリップボードにコピーされました');
     }
 }
 
@@ -388,7 +388,7 @@ class Toast extends Dialog {
     _onNotfiy(message) {
         this.$el.textContent = message;
         this.show();
-        setTimeout(_ => this.hide(), 3000);
+        setTimeout(_ => this.hide(), 5000);
     }
 }
 
@@ -415,7 +415,7 @@ class Notifications {
                 Events.fire('notify-user', Notifications.PERMISSION_ERROR || 'Error');
                 return;
             }
-            this._notify('Even more snappy sharing!');
+            this._notify('より速くファイル共有ができるようになりました！');
             this.$button.setAttribute('hidden', 1);
         });
     }
@@ -444,16 +444,16 @@ class Notifications {
 
     _messageNotification(message) {
         if (isURL(message)) {
-            const notification = this._notify(message, 'Click to open link');
+            const notification = this._notify(message, 'クリックしてリンクを開く');
             this._bind(notification, e => window.open(message, '_blank', null, true));
         } else {
-            const notification = this._notify(message, 'Click to copy text');
+            const notification = this._notify(message, 'クリックしてテキストをコピー');
             this._bind(notification, e => this._copyText(message, notification));
         }
     }
 
     _downloadNotification(message) {
-        const notification = this._notify(message, 'Click to download');
+        const notification = this._notify(message, 'クリックしてダウンロード');
         if (!window.isDownloadSupported) return;
         this._bind(notification, e => this._download(notification));
     }
@@ -466,7 +466,7 @@ class Notifications {
     _copyText(message, notification) {
         notification.close();
         if (!navigator.clipboard.writeText(message)) return;
-        this._notify('Copied text to clipboard');
+        this._notify('テキストがクリップボードにコピーされました');
     }
 
     _bind(notification, handler) {
@@ -490,11 +490,11 @@ class NetworkStatusUI {
     }
 
     _showOfflineMessage() {
-        Events.fire('notify-user', 'You are offline');
+        Events.fire('notify-user', 'オフラインです');
     }
 
     _showOnlineMessage() {
-        Events.fire('notify-user', 'You are back online');
+        Events.fire('notify-user', 'オンラインに戻りました');
     }
 }
 
@@ -624,10 +624,8 @@ Events.on('load', () => {
 });
 
 Notifications.PERMISSION_ERROR = `
-Notifications permission has been blocked
-as the user has dismissed the permission prompt several times.
-This can be reset in Page Info
-which can be accessed by clicking the lock icon next to the URL.`;
+このサイトに通知を送信する権限が与えられていません。
+URL の隣にある鍵のアイコンから権限設定を変更できます。`;
 
 document.body.onclick = e => { // safari hack to fix audio
     document.body.onclick = null;
