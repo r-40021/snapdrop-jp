@@ -1,14 +1,14 @@
 var process = require('process')
 // Handle SIGINT
 process.on('SIGINT', () => {
-  console.info("SIGINT Received, exiting...")
-  process.exit(0)
+    console.info("SIGINT Received, exiting...")
+    process.exit(0)
 })
 
 // Handle SIGTERM
 process.on('SIGTERM', () => {
-  console.info("SIGTERM Received, exiting...")
-  process.exit(0)
+    console.info("SIGTERM Received, exiting...")
+    process.exit(0)
 })
 
 // Handle APP ERRORS
@@ -30,11 +30,11 @@ const RateLimit = require('express-rate-limit');
 const http = require('http');
 
 const limiter = RateLimit({
-	windowMs: 5 * 60 * 1000, // 5 minutes
-	max: 100, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
-	message: 'Too many requests from this IP Address, please try again after 5 minutes.',
-	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
+    message: 'Too many requests from this IP Address, please try again after 5 minutes.',
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
 
 const app = express();
@@ -45,12 +45,26 @@ app.use(limiter);
 
 app.use(express.static('public'));
 
-app.use(function(req, res) {
-    res.redirect('https://' + req.headers.Host + '/');
+app.use(function (req, res) {
+    res.redirect('/');
 });
 
+function forceHttps(req, res, next) {
+    if (!process.env.PORT) {
+        return next();
+    };
+
+    if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === "http") {
+        res.redirect('https://' + req.headers.host + req.url);
+    } else {
+        return next();
+    }
+};
+
+app.all('*', forceHttps);
+
 app.get('/', (req, res) => {
-	res.sendFile('index.html');
+    res.sendFile('index.html');
 });
 
 const server = http.createServer(app);
@@ -255,18 +269,18 @@ class Peer {
 
 
         let deviceName = '';
-        
+
         if (ua.os && ua.os.name) {
             deviceName = ua.os.name.replace('Mac OS', 'Mac') + ' ';
         }
-        
+
         if (ua.device.model) {
             deviceName += ua.device.model;
         } else {
             deviceName += ua.browser.name;
         }
 
-        if(!deviceName)
+        if (!deviceName)
             deviceName = 'Unknown Device';
 
         const displayName = uniqueNamesGenerator({
@@ -323,15 +337,15 @@ class Peer {
 }
 
 Object.defineProperty(String.prototype, 'hashCode', {
-  value: function() {
-    var hash = 0, i, chr;
-    for (i = 0; i < this.length; i++) {
-      chr   = this.charCodeAt(i);
-      hash  = ((hash << 5) - hash) + chr;
-      hash |= 0; // Convert to 32bit integer
+    value: function () {
+        var hash = 0, i, chr;
+        for (i = 0; i < this.length; i++) {
+            chr = this.charCodeAt(i);
+            hash = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
     }
-    return hash;
-  }
 });
 
 new SnapdropServer();
