@@ -43,18 +43,24 @@ const publicRun = process.argv[2];
 
 app.use(limiter);
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
-app.use(function (req, res) {
+function forceHttps(req, res, next) {
+    if (!process.env.PORT) {
+        return next();
+    };
+
     if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === "http") {
         res.redirect('https://' + req.headers.host + '/');
     } else {
-        res.redirect('/');
+        return next();
     }
-});
+};
+
+app.all('*', forceHttps);
 
 app.get('/', (req, res) => {
-    res.sendFile('index1.html');
+    res.sendFile(__dirname + '/public/index1.html');
 });
 
 const server = http.createServer(app);
