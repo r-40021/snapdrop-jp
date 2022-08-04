@@ -45,9 +45,7 @@ app.use(limiter);
 
 app.use(express.static('public'));
 
-app.use(function (req, res) {
-    res.redirect('/');
-});
+app.use(forceHttps);
 
 function forceHttps(req, res, next) {
     if (!process.env.PORT) {
@@ -55,13 +53,11 @@ function forceHttps(req, res, next) {
     };
 
     if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === "http") {
-        res.redirect('https://' + req.headers.host + req.url);
+        res.redirect('https://' + req.headers.host + '/');
     } else {
         return next();
     }
 };
-
-app.all('*', forceHttps);
 
 app.get('/', (req, res) => {
     res.sendFile('index1.html');
