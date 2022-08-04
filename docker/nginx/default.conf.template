@@ -1,5 +1,5 @@
 server {
-    listen       ${PORT};
+    listen       80;
     server_name  herokuapp.com;
 
     #charset koi8-r;
@@ -35,7 +35,7 @@ server {
 }
 
 server {
-    listen       443 ssl http2;
+    listen       80;
     ssl_certificate /etc/ssl/certs/snapdrop-dev.crt;
     ssl_certificate_key /etc/ssl/certs/snapdrop-dev.key;
 
