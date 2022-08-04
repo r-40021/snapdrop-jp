@@ -1,6 +1,6 @@
 var CACHE_NAME = 'snapdrop-cache-v2';
 var urlsToCache = [
-  'index.html',
+  'index1.html',
   './',
   'styles.css',
   'scripts/network.js',
