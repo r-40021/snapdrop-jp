@@ -74,7 +74,7 @@ class PeerUI {
 
     html() {
         return `
-            <label class="column center" title="クリックでファイルを送信、右クリックでテキストを送信">
+            <label class="column center" title="クリックでファイルを送信、右クリックでメッセージを送信">
                 <input type="file" multiple>
                 <x-icon shadow="1">
                     <svg class="icon"><use xlink:href="#"/></svg>
@@ -415,7 +415,7 @@ class Notifications {
                 Events.fire('notify-user', Notifications.PERMISSION_ERROR || 'Error');
                 return;
             }
-            this._notify('Even more snappy sharing!');
+            this._notify('より速くファイルを共有できるようになります！');
             this.$button.setAttribute('hidden', 1);
         });
     }
@@ -494,7 +494,7 @@ class NetworkStatusUI {
     }
 
     _showOnlineMessage() {
-        Events.fire('notify-user', 'オンラインになりました');
+        Events.fire('notify-user', 'オンラインに戻りました');
     }
 }
 
