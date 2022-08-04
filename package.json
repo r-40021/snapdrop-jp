@@ -16,5 +16,8 @@
     "ua-parser-js": "^1.0.2",
     "unique-names-generator": "^4.3.0",
     "ws": "^8.8.1"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
