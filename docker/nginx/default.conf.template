@@ -1,6 +1,6 @@
 server {
     listen       ${PORT};
-    #server_name  your.domain;
+    server_name  herokuapp.com;
 
     #charset koi8-r;
     #access_log  /var/log/nginx/host.access.log  main;
