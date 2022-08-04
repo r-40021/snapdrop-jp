@@ -45,19 +45,13 @@ app.use(limiter);
 
 app.use(express.static('public'));
 
-app.use(forceHttps);
-
-function forceHttps(req, res, next) {
-    if (!process.env.PORT) {
-        return next();
-    };
-
+app.use(function (req, res) {
     if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === "http") {
         res.redirect('https://' + req.headers.host + '/');
     } else {
-        return next();
+        res.redirect('/');
     }
-};
+});
 
 app.get('/', (req, res) => {
     res.sendFile('index1.html');
