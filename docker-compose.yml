@@ -14,8 +14,8 @@ services:
     image: "nginx-with-openssl"
     volumes:
       - ./client:/usr/share/nginx/html
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template
+      # - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      # - ./docker/nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template
       - ./docker/certs:/etc/ssl/certs
       - ./docker/openssl:/mnt/openssl
     ports:
