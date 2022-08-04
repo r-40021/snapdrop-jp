@@ -53,9 +53,12 @@ app.get('/', (req, res) => {
 	res.sendFile('index.html');
 });
 
-const server = http.createServer(app,  (request, response) => {
-    response.redirect(`https://${request.hostname}${request.url}`);
-});
+const server = http.createServer(app);
+
+server.get('*', function(req, res) {  
+    res.redirect('https://' + req.headers.Host + req.url);
+})
+
 (!publicRun == "public") ? server.listen(port) : server.listen(port, '0.0.0.0');
 
 const parser = require('ua-parser-js');
