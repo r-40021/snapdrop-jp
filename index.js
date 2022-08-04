@@ -64,7 +64,7 @@ function forceHttps(req, res, next) {
 app.all('*', forceHttps);
 
 app.get('/', (req, res) => {
-    res.sendFile('index.html');
+    res.sendFile('index1.html');
 });
 
 const server = http.createServer(app);
