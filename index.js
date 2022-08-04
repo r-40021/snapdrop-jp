@@ -49,15 +49,15 @@ app.use(function(req, res) {
     res.redirect('/');
 });
 
+app.get('*', function(req, res) {  
+    res.redirect('https://' + req.headers.Host + req.url);
+})
+
 app.get('/', (req, res) => {
 	res.sendFile('index.html');
 });
 
 const server = http.createServer(app);
-
-server.get('*', function(req, res) {  
-    res.redirect('https://' + req.headers.Host + req.url);
-})
 
 (!publicRun == "public") ? server.listen(port) : server.listen(port, '0.0.0.0');
 
