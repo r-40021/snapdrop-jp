@@ -1,32 +1,11 @@
-# Snapdrop 
+# node-snapdrop [![CodeQL](https://github.com/Bellisario/node-snapdrop/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Bellisario/node-snapdrop/actions/workflows/codeql-analysis.yml)
+Just the original [Snapdrop](https://github.com/RobinLinus/Snapdrop), with complete Node.js server.
 
-[Snapdrop](https://snapdrop.net): local file sharing in your browser. Inspired by Apple's Airdrop.
+## How to run
+Download the repository in a folder, cd it, install all dependencies with `npm i` and use this command: `node index.js`.
+### Run within your ip
+Use this command, instead, to run not locally but in your public "sharable" ip: `node index.js public`.\
+Make sure to check your ip address using your OS command.
 
-
-#### Snapdrop is built with the following awesome technologies:
-* Vanilla HTML5 / ES6 / CSS3 frontend
-* [WebRTC](http://webrtc.org/) / [WebSockets](http://www.websocket.org/)
-* [NodeJS](https://nodejs.org/en/) backend
-* [Progressive Web App](https://wikipedia.org/wiki/Progressive_Web_App)
-
-
-Have any questions? Read our [FAQ](/docs/faq.md).
-
-You can [host your own instance with Docker](/docs/local-dev.md).
-
-
-## Support the Snapdrop Community
-Snapdrop is free. Still, we have to pay for the server. If you want to contribute, please use PayPal:
-
-[<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FTP9DXUR7LA7Q&source=url)
-
-or Bitcoin:
-
-[<img src="https://coins.github.io/thx/logo-color-large-pill-320px.png" alt="CoinThx" width="200"/>](https://coins.github.io/thx/#1K9zQ8f4iTyhKyHWmiDKt21cYX2QSDckWB?label=Snapdrop&message=Thanks!%20Your%20contribution%20helps%20to%20keep%20Snapdrop%20free%20for%20everybody!) 
-
-Alternatively, you can become a [Github Sponsor](https://github.com/sponsors/RobinLinus).
-
-Thanks a lot for supporting free and open software!
-
-
- 
+## How to contribute
+Feel free to [open an issue](https://github.com/Bellisario/node-snapdrop/issues/new/choose) or a [pull request](https://github.com/Bellisario/node-snapdrop/pulls) but follow [Contributing Guidelines](https://github.com/Bellisario/node-snapdrop/blob/main/CONTRIBUTING.md).
