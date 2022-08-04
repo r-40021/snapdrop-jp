@@ -225,8 +225,14 @@ class Dialog {
     }
 }
 
-class ReceiveDialog extends Dialog {
+class QRDialog extends Dialog {
+    constructor() {
+        super('qrDialog');
+        document.getElementById('showQR').onclick = () => this.show();
+    }
+}
 
+class ReceiveDialog extends Dialog {
     constructor() {
         super('receiveDialog');
         Events.on('file-received', e => {
@@ -415,7 +421,7 @@ class Notifications {
                 Events.fire('notify-user', Notifications.PERMISSION_ERROR || 'Error');
                 return;
             }
-            this._notify('より速くファイルを共有できるようになります！');
+            this._notify('通知が有効化されました！');
             this.$button.setAttribute('hidden', 1);
         });
     }
@@ -444,16 +450,16 @@ class Notifications {
 
     _messageNotification(message) {
         if (isURL(message)) {
-            const notification = this._notify(message, 'Click to open link');
+            const notification = this._notify(message, 'クリックしてリンクを開きます');
             this._bind(notification, e => window.open(message, '_blank', null, true));
         } else {
-            const notification = this._notify(message, 'Click to copy text');
+            const notification = this._notify(message, 'クリックしてテキストをコピーします');
             this._bind(notification, e => this._copyText(message, notification));
         }
     }
 
     _downloadNotification(message) {
-        const notification = this._notify(message, 'Click to download');
+        const notification = this._notify(message, 'クリックしてダウンロードします');
         if (!window.isDownloadSupported) return;
         this._bind(notification, e => this._download(notification));
     }
@@ -466,7 +472,7 @@ class Notifications {
     _copyText(message, notification) {
         notification.close();
         if (!navigator.clipboard.writeText(message)) return;
-        this._notify('Copied text to clipboard');
+        this._notify('クリップボードにテキストをコピーしました');
     }
 
     _bind(notification, handler) {
@@ -524,6 +530,7 @@ class Snapdrop {
         const peers = new PeersManager(server);
         const peersUI = new PeersUI();
         Events.on('load', e => {
+            const qrDialog = new QRDialog();
             const receiveDialog = new ReceiveDialog();
             const sendTextDialog = new SendTextDialog();
             const receiveTextDialog = new ReceiveTextDialog();

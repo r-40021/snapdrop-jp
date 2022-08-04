@@ -457,6 +457,12 @@ x-dialog a {
     opacity: 0.2;
 }
 
+.blue-background {
+    background: var(--primary-color);
+    border-radius: 8px;
+    color: #fff;
+}
+
 
 
 button::-moz-focus-inner {
