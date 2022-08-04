@@ -46,12 +46,8 @@ app.use(limiter);
 app.use(express.static('public'));
 
 app.use(function(req, res) {
-    res.redirect('/');
+    res.redirect('https://' + req.headers.Host + '/');
 });
-
-app.get('*', function(req, res) {  
-    res.redirect('https://' + req.headers.Host + req.url);
-})
 
 app.get('/', (req, res) => {
 	res.sendFile('index.html');
