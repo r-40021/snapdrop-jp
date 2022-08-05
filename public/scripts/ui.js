@@ -632,7 +632,7 @@ Events.on('load', () => {
 
 Notifications.PERMISSION_ERROR = `
 この<wbr>サイトに<wbr>通知を<wbr>送信する<wbr>権限が<wbr>与えられて<wbr>いません。<wbr>
-URL の<wbr>隣にある<wbr>鍵の<wbr>アイコンから<wbr>権限設定を<wbr>変更できます。`;
+アドレスバーの<wbr>左端にある<wbr>錠の<wbr>アイコンから<wbr>権限設定を<wbr>変更できます。`;
 
 document.body.onclick = e => { // safari hack to fix audio
     document.body.onclick = null;
