@@ -1,4 +1,9 @@
 # Snapdrop JP
+
+![image](https://user-images.githubusercontent.com/75155258/183014533-629a505b-7f9c-427a-822b-0b8fded851cf.png)
+
+# English
+
 A Japanese version of [Snapdrop](https://snapdrop.net), a simple way to transfer files.
 
 ## How to run
@@ -12,6 +17,7 @@ A Japanese version of [Snapdrop](https://snapdrop.net), a simple way to transfer
 
 English or Japanese is welcome!
 
+# 日本語 / Japanese
 
 簡単にファイルを転送できる [Snapdrop](https://snapdrop.net) の日本語版
 
