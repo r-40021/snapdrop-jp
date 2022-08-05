@@ -365,6 +365,11 @@ x-dialog a {
     color: var(--primary-color);
 }
 
+.word-break {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
 /* Receive Dialog */
 #receiveDialog .row {
     margin-top: 24px;
