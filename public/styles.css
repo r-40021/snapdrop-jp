@@ -366,6 +366,7 @@ x-dialog a {
 }
 
 .word-break {
+    display: inline-block;
     word-break: keep-all;
     overflow-wrap: break-word;
 }

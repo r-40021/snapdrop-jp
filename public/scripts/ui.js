@@ -392,7 +392,7 @@ class Toast extends Dialog {
     }
 
     _onNotfiy(message) {
-        this.$el.textContent = message;
+        this.$el.innerHTML = message;
         this.show();
         setTimeout(_ => this.hide(), 3000);
     }
@@ -496,11 +496,11 @@ class NetworkStatusUI {
     }
 
     _showOfflineMessage() {
-        Events.fire('notify-user', 'オフラインです');
+        Events.fire('notify-user', 'オフライン<wbr>です');
     }
 
     _showOnlineMessage() {
-        Events.fire('notify-user', 'オンラインに戻りました');
+        Events.fire('notify-user', 'オンラインに<wbr>戻りました');
     }
 }
 
@@ -631,8 +631,8 @@ Events.on('load', () => {
 });
 
 Notifications.PERMISSION_ERROR = `
-このサイトに通知を送信する権限が与えられていません。
-URL の隣にある鍵のアイコンから権限設定を変更できます。`;
+この<wbr>サイトに<wbr>通知を<wbr>送信する<wbr>権限が<wbr>与えられて<wbr>いません。<wbr>
+URL の<wbr>隣にある<wbr>鍵の<wbr>アイコンから<wbr>権限設定を<wbr>変更できます。`;
 
 document.body.onclick = e => { // safari hack to fix audio
     document.body.onclick = null;
