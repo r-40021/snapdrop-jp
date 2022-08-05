@@ -12,6 +12,9 @@ A Japanese version of [Snapdrop](https://snapdrop.net), a simple way to transfer
 
 English or Japanese is welcome!
 
+## Special thanks
+- [RobinLinus](https://github.com/RobinLinus) ([Snapdrop](https://github.com/RobinLinus/snapdrop))
+- [Giorgio Bellisario](https://github.com/Bellisario/) ([node-snapdrop](https://github.com/Bellisario/node-snapdrop))
 
 簡単にファイルを転送できる [Snapdrop](https://snapdrop.net) の日本語版
 
@@ -25,3 +28,7 @@ English or Japanese is welcome!
 - [Pull Request を立てる](https://github.com/r-40021/snapdrop-jp/pulls) 
 
 日本語でも英語でも構いません！
+
+## 謝辞
+- [RobinLinus](https://github.com/RobinLinus) ([Snapdrop](https://github.com/RobinLinus/snapdrop))
+- [Giorgio Bellisario](https://github.com/Bellisario/) ([node-snapdrop](https://github.com/Bellisario/node-snapdrop))
