@@ -1,11 +1,27 @@
-# node-snapdrop [![CodeQL](https://github.com/Bellisario/node-snapdrop/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Bellisario/node-snapdrop/actions/workflows/codeql-analysis.yml)
-Just the original [Snapdrop](https://github.com/RobinLinus/Snapdrop), with complete Node.js server.
+# Snapdrop JP
+A Japanese version of [snapdrop](https://snapdrop.net), a simple way to transfer files.
 
 ## How to run
-Download the repository in a folder, cd it, install all dependencies with `npm i` and use this command: `node index.js`.
-### Run within your ip
-Use this command, instead, to run not locally but in your public "sharable" ip: `node index.js public`.\
-Make sure to check your ip address using your OS command.
+1. Clone this repository to your computer.
+2. Open a terminal and run `npm install`, then `npm start`.
+3. Open a browser and go to http://localhost:3000/
 
 ## How to contribute
-Feel free to [open an issue](https://github.com/Bellisario/node-snapdrop/issues/new/choose) or a [pull request](https://github.com/Bellisario/node-snapdrop/pulls) but follow [Contributing Guidelines](https://github.com/Bellisario/node-snapdrop/blob/main/CONTRIBUTING.md).
+- [Open an issue](https://github.com/r-40021/snapdrop-jp/issues)
+- [Open a pull request](https://github.com/r-40021/snapdrop-jp/pulls) 
+
+English or Japanese is welcome!
+
+
+簡単にファイルを転送できる [snapdrop](https://snapdrop.net) の日本語版
+
+## 実行方法
+1. ローカルマシンにリポジトリをクローンする
+2. `npm install` コマンドを実行し、その後`npm start` コマンドを実行する。
+3. ブラウザを開いて http://localhost:3000/ にアクセスする。
+
+## 貢献する
+- [Issue を立てる](https://github.com/r-40021/snapdrop-jp/issues)
+- [Pull Request を立てる](https://github.com/r-40021/snapdrop-jp/pulls) 
+
+日本語でも英語でも構いません！
