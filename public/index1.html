@@ -45,7 +45,7 @@
                 <use xlink:href="#info-outline" />
             </svg>
         </a>
-        <a href="#" id="theme" class="icon-button" title="ダークモード / ライトモード切り替え" >
+        <a href="#" id="theme" class="icon-button" title="ライト / ダークモード切り替え" >
             <svg class="icon">
                 <use xlink:href="#icon-theme" />
             </svg>
@@ -64,10 +64,10 @@
     <!-- Peers -->
     <x-peers class="center"></x-peers>
     <x-no-peers>
-        <h2>ファイルを送信するには、このページを他のデバイスで開きます</h2>
+        <h2>このページを他のデバイスで開くと、ファイルを送受信できます</h2>
         <p style="text-align: center;"><button class="button blue-background" id="showQR" style="display: inline-flex;">QR コードを表示</button></p>
     </x-no-peers>
-    <x-instructions desktop="クリックでファイルを送信、右クリックでメッセージを送信" mobile="タップでファイルを送信、ロングタップでメッセージを送信"></x-instructions>
+    <x-instructions desktop="クリックしてファイルを送信、右クリックしてメッセージを送信" mobile="タップしてファイルを送信、ロングタップしてメッセージを送信"></x-instructions>
     <!-- Footer -->
     <footer class="column">
         <svg class="icon logo">
@@ -94,7 +94,7 @@
     <x-dialog id="receiveDialog">
         <x-background class="full center">
             <x-paper shadow="2">
-                <h3>ファイル受信</h3>
+                <h3>ファイルを受信しました</h3>
                 <div class="font-subheading" id="fileName">ファイル名</div>
                 <div class="font-body2" id="fileSize"></div>
                 <div class='preview' style="visibility: hidden;">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="row-reverse">
                     <a class="button" close id="download" title="Download File" autofocus>保存</a>
-                    <button class="button" close>無視</button>
+                    <button class="button" close>破棄</button>
                 </div>
             </x-paper>
         </x-background>
@@ -117,7 +117,7 @@
             <x-background class="full center">
                 <x-paper shadow="2">
                     <h3>メッセージを送信</h3>
-                    <div id="textInput" class="textarea" role="textbox" placeholder="メッセージを送信" autocomplete="off" autofocus contenteditable></div>
+                    <div id="textInput" class="textarea" role="textbox" placeholder="送信するメッセージを入力…" autocomplete="off" autofocus contenteditable></div>
                     <div class="row-reverse">
                         <button class="button" type="submit" close>送信</button>
                         <a class="button" close>キャンセル</a>
@@ -130,7 +130,7 @@
     <x-dialog id="receiveTextDialog">
         <x-background class="full center">
             <x-paper shadow="2">
-                <h3>メッセージ受信</h3>
+                <h3>メッセージを受信しました</h3>
                 <div class="font-subheading" id="text"></div>
                 <div class="row-reverse">
                     <button class="button" id="copy" close autofocus>コピー</button>
@@ -141,7 +141,7 @@
     </x-dialog>
     <!-- Toast -->
     <div class="toast-container full center">
-        <x-toast class="row" shadow="1" id="toast">ファイル送信完了</x-toast>
+        <x-toast class="row" shadow="1" id="toast">ファイルを正常に送信しました</x-toast>
     </div>
     <!-- About Page -->
     <x-about id="about" class="full center column">
@@ -159,7 +159,7 @@
             <h1>Snapdrop JP</h1>
             <div class="font-subheading">デバイス間で簡単にデータを転送できる <a href="https://snapdrop.net" target="_blank" rel="noopener noreferrer">Snapdrop</a> を日本語化した非公式サイトです。
                 <div style="font-size:11px;line-height: 1.7;margin-top: 1em;">
-                    Node.js バージョン作成： <a href="https://github.com/Bellisario" target="_blank">Bellisario</a><br>
+                    Node.js 版作成： <a href="https://github.com/Bellisario" target="_blank">Bellisario</a><br>
                     日本語版作成： <a href="https://github.com/r-40021" target="_blank">蛙</a>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                         <use xlink:href="#monetarization" />
                     </svg>
                 </a>
-                <a class="icon-button" target="_blank" href="https://twitter.com/intent/tweet?text=https://snap-jp.herokuapp.com" title="Snapdrop JP に関するツイートをする" rel="noreferrer">
+                <a class="icon-button" target="_blank" href="https://twitter.com/intent/tweet?text=https://snap-jp.herokuapp.com" title="ツイートして Snapdrop JP を広める" rel="noreferrer">
                     <svg class="icon">
                         <use xlink:href="#twitter" />
                     </svg>
@@ -247,7 +247,7 @@
     <noscript>
         <x-noscript class="full center column">
             <h1>JavaScript を有効にしてください</h1>
-            <h3>Snapdrop JP は JavaScript でのみ動作します</h3>
+            <h3>Snapdrop JP の動作には JavaScript が必要です</h3>
         </x-noscript>
         <style>
         x-noscript {

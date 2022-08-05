@@ -74,7 +74,7 @@ class PeerUI {
 
     html() {
         return `
-            <label class="column center" title="クリックでファイルを送信、右クリックでメッセージを送信">
+            <label class="column center" title="クリックしてファイルを送信、右クリックしてメッセージを送信">
                 <input type="file" multiple>
                 <x-icon shadow="1">
                     <svg class="icon"><use xlink:href="#"/></svg>
@@ -421,7 +421,7 @@ class Notifications {
                 Events.fire('notify-user', Notifications.PERMISSION_ERROR || 'Error');
                 return;
             }
-            this._notify('通知が有効化されました！');
+            this._notify('通知が有効化されました');
             this.$button.setAttribute('hidden', 1);
         });
     }
@@ -450,16 +450,16 @@ class Notifications {
 
     _messageNotification(message) {
         if (isURL(message)) {
-            const notification = this._notify(message, 'クリックしてリンクを開きます');
+            const notification = this._notify(message, 'クリックするとリンクを開けます');
             this._bind(notification, e => window.open(message, '_blank', null, true));
         } else {
-            const notification = this._notify(message, 'クリックしてテキストをコピーします');
+            const notification = this._notify(message, 'クリックするとテキストをコピーできます');
             this._bind(notification, e => this._copyText(message, notification));
         }
     }
 
     _downloadNotification(message) {
-        const notification = this._notify(message, 'クリックしてダウンロードします');
+        const notification = this._notify(message, 'クリックするとファイルをダウンロードできます');
         if (!window.isDownloadSupported) return;
         this._bind(notification, e => this._download(notification));
     }
@@ -472,7 +472,7 @@ class Notifications {
     _copyText(message, notification) {
         notification.close();
         if (!navigator.clipboard.writeText(message)) return;
-        this._notify('クリップボードにテキストをコピーしました');
+        this._notify('テキストをクリップボードにコピーしました');
     }
 
     _bind(notification, handler) {
