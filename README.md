@@ -1,5 +1,5 @@
 # Snapdrop JP
-A Japanese version of [snapdrop](https://snapdrop.net), a simple way to transfer files.
+A Japanese version of [Snapdrop](https://snapdrop.net), a simple way to transfer files.
 
 ## How to run
 1. Clone this repository to your computer.
@@ -13,7 +13,7 @@ A Japanese version of [snapdrop](https://snapdrop.net), a simple way to transfer
 English or Japanese is welcome!
 
 
-簡単にファイルを転送できる [snapdrop](https://snapdrop.net) の日本語版
+簡単にファイルを転送できる [Snapdrop](https://snapdrop.net) の日本語版
 
 ## 実行方法
 1. ローカルマシンにリポジトリをクローンする
