@@ -32,7 +32,7 @@ const http = require('http');
 const limiter = RateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes
     max: 100, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
-    message: 'この IP アドレスからのリクエストが多すぎます。5分後に再度試してください。',
+    message: '同じ IP アドレスからのリクエストが多すぎます。5分ほど時間を空けてアクセスし直してください。',
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
@@ -68,7 +68,7 @@ const server = http.createServer(app);
 (!publicRun == "public") ? server.listen(port) : server.listen(port, '0.0.0.0');
 
 const parser = require('ua-parser-js');
-const { uniqueNamesGenerator, animals, colors } = require('unique-names-generator');
+const generateName = require('./script/generateName');
 
 class SnapdropServer {
 
@@ -279,13 +279,7 @@ class Peer {
         if (!deviceName)
             deviceName = 'Unknown Device';
 
-        const displayName = uniqueNamesGenerator({
-            length: 2,
-            separator: ' ',
-            dictionaries: [colors, animals],
-            style: 'capital',
-            seed: this.id.hashCode()
-        })
+        const displayName = generateName();
 
         this.name = {
             model: ua.device.model,
