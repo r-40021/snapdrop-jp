@@ -1,6 +1,6 @@
 # Snapdrop JP
 
-![Screenshot](https://user-images.githubusercontent.com/75155258/183014773-2b4d9083-a61a-4627-951e-48accd4f9afb.png)
+![Screenshot](https://user-images.githubusercontent.com/75155258/183087173-efb1db87-b622-4338-a5eb-7a64b03dc871.png)
 
 # English
 
