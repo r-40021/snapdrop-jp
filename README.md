@@ -25,6 +25,8 @@ English or Japanese is welcome!
 
 簡単にファイルを転送できる [Snapdrop](https://snapdrop.net) の日本語版
 
+[使い方](https://github.com/r-40021/snapdrop-jp/wiki)
+
 ## 実行方法
 1. ローカルマシンにリポジトリをクローンする
 2. `npm install` コマンドを実行し、その後`npm start` コマンドを実行する。
