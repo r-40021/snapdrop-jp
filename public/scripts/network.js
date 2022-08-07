@@ -384,7 +384,7 @@ class PeersManager {
                 this.peers[peer.id].refresh();
                 return;
             }
-            if (window.isRtcSupported && peer.rtcSupported) {
+            if ( false && window.isRtcSupported && peer.rtcSupported) {
                 this.peers[peer.id] = new RTCPeer(this._server, peer.id);
             } else {
                 this.peers[peer.id] = new WSPeer(this._server, peer.id);
@@ -517,7 +517,9 @@ class Events {
 
 RTCPeer.config = {
     'sdpSemantics': 'unified-plan',
-    'iceServers': [{
-        urls: 'stun:stun.l.google.com:19302'
-    }]
+    'iceServers': [
+        {urls: 'stun:stun.l.google.com:19302'},
+        {urls: 'stun:stun1.l.google.com:19302'},
+        {urls: 'stun:stun2.l.google.com:19302'}
+    ]
 }
