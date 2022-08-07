@@ -1,6 +1,7 @@
 {
     "name": "Snapdrop JP",
     "short_name": "Snapdrop JP",
+    "description": "画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有できるアプリ",
     "icons": [{
         "src": "images/android-chrome-192x192.png",
         "sizes": "192x192",
@@ -26,7 +27,7 @@
     }],
     "background_color": "#efefef",
     "start_url": "/",
-    "display": "minimal-ui",
+    "display": "standalone",
     "theme_color": "#3367d6",
     "share_target": {
         "method":"GET",
