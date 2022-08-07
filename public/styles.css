@@ -369,6 +369,7 @@ x-dialog a {
     display: inline-block;
     word-break: keep-all;
     overflow-wrap: break-word;
+    line-height: 2;
 }
 
 /* Receive Dialog */
