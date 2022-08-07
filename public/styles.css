@@ -369,6 +369,9 @@ x-dialog a {
     display: inline-block;
     word-break: keep-all;
     overflow-wrap: break-word;
+}
+
+.centered-text {
     line-height: 2;
 }
 
