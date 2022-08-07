@@ -421,7 +421,7 @@ class Notifications {
                 Events.fire('notify-user', Notifications.PERMISSION_ERROR || 'Error');
                 return;
             }
-            this._notify('通知が有効化されました');
+            this._notify('通知が有効化されました', 'ファイルやテキストを受信したら通知でお知らせします');
             this.$button.setAttribute('hidden', 1);
         });
     }
