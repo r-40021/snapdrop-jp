@@ -384,7 +384,7 @@ class PeersManager {
                 this.peers[peer.id].refresh();
                 return;
             }
-            if ( false && window.isRtcSupported && peer.rtcSupported) {
+            if (window.isRtcSupported && peer.rtcSupported) {
                 this.peers[peer.id] = new RTCPeer(this._server, peer.id);
             } else {
                 this.peers[peer.id] = new WSPeer(this._server, peer.id);
