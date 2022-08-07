@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- Web App Config -->
-    <title>Snapdrop JP - ファイルやテキストを同一ネットワーク上の人と素早く共有できるブラウザアプリ</title>
+    <title>Snapdrop JP - ブラウザで使えるファイル共有アプリ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#3367d6">
     <meta name="color-scheme" content="dark light">
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-title" content="Snapdrop JP">
     <!-- Descriptions -->
-    <meta name="description" content="画像、動画、PDF、URLを同一ネットワーク上の人と素早く共有。面倒な設定や会員登録は必要ありません。">
+    <meta name="description" content="画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有。面倒な設定や会員登録は必要ありません。">
     <meta name="keywords" content="File, Transfer, Share, Peer2Peer, ファイル, 転送, 共有, シェア, P2P, 日本語">
     <meta name="author" content="Frog">
     <meta property="og:title" content="Snapdrop JP">
@@ -20,8 +20,8 @@
     <meta property="og:url" content="https://snap-jp.herokuapp.com/">
     <meta name="twitter:author" content="@FrogApp_">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="画像、動画、PDF、URLを同一ネットワーク上の人と素早く共有。面倒な設定や会員登録は必要ありません。">
-    <meta name="og:description" content="画像、動画、PDF、URLを同一ネットワーク上の人と素早く共有。面倒な設定や会員登録は必要ありません。">
+    <meta name="twitter:description" content="画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有。面倒な設定や会員登録は必要ありません。">
+    <meta name="og:description" content="画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有。面倒な設定や会員登録は必要ありません。">
     <!-- Icons -->
     <link rel="icon" sizes="96x96" href="images/favicon-96x96.png">
     <link rel="shortcut icon" href="images/favicon-96x96.png">
@@ -64,7 +64,7 @@
     <!-- Peers -->
     <x-peers class="center"></x-peers>
     <x-no-peers class="word-break">
-        <h2>ファイルを<wbr>送信する<wbr>には、<wbr>この<wbr>ページを<wbr>他の<wbr>デバイスで<wbr>開きます</h2>
+        <h2 class="open-message">ファイルを<wbr>送信する<wbr>には、<wbr>この<wbr>ページを<wbr>同じ<wbr>ネットワーク上の<wbr>他の<wbr>デバイスで<wbr>開きます</h2>
         <p style="text-align: center;"><button class="button blue-background" id="showQR" style="display: inline-flex;">QR コードを表示</button></p>
     </x-no-peers>
     <x-instructions desktop="クリックしてファイルを送信、右クリックしてメッセージを送信" mobile="タップしてファイルを送信、ロングタップしてメッセージを送信"></x-instructions>
@@ -74,7 +74,7 @@
             <use xlink:href="#wifi-tethering" />
         </svg>
         <div id="displayName" placeholder="デバイス間でデータを簡単に転送"></div>
-        <div class="font-body2">同じネットワーク上の全員がこのデバイスを見つけられます</div>
+        <div class="font-body2 word-break">同じ<wbr>ネットワーク上の<wbr>全員が<wbr>この<wbr>デバイスを<wbr>見つけられます</div>
     </footer>
     <!-- QR Dialog -->
     <x-dialog id="qrDialog">
