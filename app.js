@@ -57,7 +57,21 @@ function forceHttps(req, res, next) {
     }
 };
 
+function redirectToDomain(req, res, next) {
+    if (!process.env.PORT) {
+        return next();
+    };
+
+    if (req.headers.host !== 'share.frogapp.net') {
+        res.redirect(301, 'https://share.frogapp.net/');
+    } else {
+        return next();
+    }
+}
+
 app.all('*', forceHttps);
+
+app.all('*', redirectToDomain)
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index1.html');
