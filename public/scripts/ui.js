@@ -426,7 +426,7 @@ class Notifications {
         });
     }
 
-    _notify(message, body, closeTimeout = 20000) {
+    _notify(message, body) {
         const config = {
             body: body,
             icon: '/images/logo_transparent_128x128.png',
@@ -441,27 +441,35 @@ class Notifications {
         }
 
         // Notification is persistent on Android. We have to close it manually
-        if (closeTimeout) {
-            setTimeout(_ => notification.close(), closeTimeout);
-        }
+        const visibilitychangeHandler = () => {                             
+            if (document.visibilityState === 'visible') {    
+                notification.close();
+                Events.off('visibilitychange', visibilitychangeHandler);
+            }                                                       
+        };                                                                                
+        Events.on('visibilitychange', visibilitychangeHandler);
 
         return notification;
     }
 
     _messageNotification(message) {
-        if (isURL(message)) {
-            const notification = this._notify(message, 'クリックするとリンクを開けます');
-            this._bind(notification, e => window.open(message, '_blank', null, true));
-        } else {
-            const notification = this._notify(message, 'クリックするとテキストをコピーできます');
-            this._bind(notification, e => this._copyText(message, notification));
+        if (document.visibilityState !== 'visible') {
+            if (isURL(message)) {
+                const notification = this._notify(message, 'クリックしてリンクを開きます');
+                this._bind(notification, e => window.open(message, '_blank', null, true));
+            } else {
+                const notification = this._notify(message, 'クリックしてテキストをコピーします');
+                this._bind(notification, e => this._copyText(message, notification));
+            }
         }
     }
 
     _downloadNotification(message) {
-        const notification = this._notify(message, 'クリックするとファイルをダウンロードできます');
-        if (!window.isDownloadSupported) return;
-        this._bind(notification, e => this._download(notification));
+        if (document.visibilityState !== 'visible') {
+            const notification = this._notify(message, 'Click to download');
+            if (!window.isDownloadSupported) return;
+            this._bind(notification, e => this._download(notification));
+        }
     }
 
     _download(notification) {
