@@ -25,12 +25,12 @@ English or Japanese is welcome!
 
 簡単にファイルを転送できる [Snapdrop](https://snapdrop.net) の日本語版
 
-[使い方](https://github.com/r-40021/snapdrop-jp/wiki)
+[使い方・よくある質問](https://github.com/r-40021/snapdrop-jp/wiki)
 
 ## 実行方法
 1. ローカルマシンにリポジトリをクローンする
-2. `npm install` コマンドを実行し、その後`npm start` コマンドを実行する。
-3. ブラウザを開いて http://localhost:3000/ にアクセスする。
+2. `npm install` コマンドを実行し、その後`npm start` コマンドを実行する
+3. ブラウザを開いて http://localhost:3000/ にアクセスする
 
 ## 貢献する
 - [Issue を立てる](https://github.com/r-40021/snapdrop-jp/issues)
