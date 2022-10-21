@@ -455,10 +455,10 @@ class Notifications {
     _messageNotification(message) {
         if (document.visibilityState !== 'visible') {
             if (isURL(message)) {
-                const notification = this._notify(message, 'クリックしてリンクを開きます');
+                const notification = this._notify(message, 'クリックするとリンクを開けます');
                 this._bind(notification, e => window.open(message, '_blank', null, true));
             } else {
-                const notification = this._notify(message, 'クリックしてテキストをコピーします');
+                const notification = this._notify(message, 'クリックするとテキストをコピーできます');
                 this._bind(notification, e => this._copyText(message, notification));
             }
         }
