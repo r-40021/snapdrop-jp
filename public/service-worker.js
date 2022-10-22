@@ -1,4 +1,4 @@
-var CACHE_NAME = 'snapdrop-cache-v2-221022';
+var CACHE_NAME = 'snapdrop-cache-v2-221022-2';
 var urlsToCache = [
   'index1.html',
   './',
