@@ -508,7 +508,7 @@ class NetworkStatusUI {
     }
 
     _showOnlineMessage() {
-        Events.fire('notify-user', 'オンラインに<wbr>戻りました');
+        Events.fire('notify-user', 'オンラインに<wbr>なりました');
     }
 }
 
