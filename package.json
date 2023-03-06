@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "ua-parser-js": "^1.0.33",
+    "ua-parser-js": "^1.0.34",
     "ws": "^8.12.1"
   },
   "engines": {
