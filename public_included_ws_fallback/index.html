@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Web App Config -->
+    <title>PairDrop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3367d6">
+    <meta name="color-scheme" content="dark light">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-mobile-web-app-title" content="PairDrop">
+    <meta name="application-name" content="PairDrop">
+    <!-- Descriptions -->
+    <meta name="description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
+    <meta name="keywords" content="File, Transfer, Share, Peer2Peer">
+    <meta name="author" content="RobinLinus">
+    <meta property="og:title" content="PairDrop">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://pairdrop.net/">
+    <meta property="og:author" content="https://github.com/schlagmichdoch">
+    <meta name="twitter:author" content="@schlagmichdoch">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
+    <meta name="og:description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
+    <!-- Icons -->
+    <link rel="icon" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="shortcut icon" href="images/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="msapplication-TileImage" content="images/mstile-150x150.png">
+    <link rel="fluid-icon" type="image/png" href="images/android-chrome-192x192.png">
+    <meta name="twitter:image" content="images/logo_transparent_512x512.png">
+    <meta property="og:image" content="images/logo_transparent_512x512.png">
+    <!-- Resources -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body translate="no">
+    <header class="row-reverse">
+        <a href="#about" class="icon-button" title="About PairDrop" aria-label="Open About PairDrop">
+            <svg class="icon">
+                <use xlink:href="#info-outline" />
+            </svg>
+        </a>
+        <div id="theme-wrapper">
+            <div id="theme-auto" class="icon-button selected" title="Adapt Theme to System" >
+                <svg class="icon">
+                    <use xlink:href="#icon-theme-auto" />
+                </svg>
+            </div>
+            <div>
+                <div id="theme-light" class="icon-button" title="Always Use Light-Theme" >
+                    <svg class="icon">
+                        <use xlink:href="#icon-theme-light" />
+                    </svg>
+                </div>
+                <div id="theme-dark" class="icon-button" title="Always Use Dark-Theme" >
+                    <svg class="icon">
+                        <use xlink:href="#icon-theme-dark" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div id="notification" class="icon-button" title="Enable Notifications" hidden>
+            <svg class="icon">
+                <use xlink:href="#notifications" />
+            </svg>
+        </div>
+        <div id="install" class="icon-button" title="Install PairDrop" hidden>
+            <svg class="icon">
+                <use xlink:href="#homescreen" />
+            </svg>
+        </div>
+        <div id="pair-device" class="icon-button" title="Pair Device" hidden>
+            <svg class="icon">
+                <use xlink:href="#pair-device-icon" />
+            </svg>
+        </div>
+        <div id="edit-paired-devices" class="icon-button" title="Edit Paired Devices" hidden>
+            <svg class="icon">
+                <use xlink:href="#edit-pair-devices-icon" />
+            </svg>
+        </div>
+        <div id="cancel-paste-mode" class="button" hidden>Done</div>
+    </header>
+    <!-- Center -->
+    <div id="center">
+        <!-- Peers -->
+        <div class="x-peers-filler"></div>
+        <x-peers class="center"></x-peers>
+        <x-no-peers>
+            <h2>Open PairDrop on other devices to send files</h2>
+            <div>Pair devices to be discoverable on other networks</div>
+        </x-no-peers>
+        <x-instructions desktop="Click to send files or right click to send a message" mobile="Tap to send files or long tap to send a message">
+            <p id="paste-filename"></p>
+        </x-instructions>
+    </div>
+    <!-- Footer -->
+    <footer class="column">
+        <svg class="icon logo">
+            <use xlink:href="#wifi-tethering" />
+        </svg>
+        <div>
+            <span>You are known as:</span>
+            <div id="display-name" placeholder="Loading..." title="Edit your device name permanently" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" contenteditable></div>
+            <svg id="edit-pen" class="icon">
+                <use xlink:href="#edit-pen-icon" />
+            </svg>
+        </div>
+        <div class="font-body2">
+            You can be discovered by everyone <span id="on-this-network">on&nbsp;this&nbsp;network</span>
+            <span id="and-by-paired-devices" hidden> and&nbsp;by&nbsp;<span id="paired-devices">paired&nbsp;devices</span></span>
+        </div>
+        <div id="websocket-fallback">
+            <span>Traffic is <span>routed through the server</span> if WebRTC is not available.</span>
+        </div>
+    </footer>
+    <!-- Pair Device Dialog -->
+    <x-dialog id="pair-device-dialog">
+        <form action="#">
+            <x-background class="full center text-center">
+                <x-paper shadow="2">
+                    <h2 class="center">Pair Devices</h2>
+                    <div id="room-key-qr-code" class="center"></div>
+                    <h1 id="room-key" class="center">000 000</h1>
+                    <div id="pair-instructions" class="font-subheading center text-center">Input this key on another device<br>or scan the QR-Code.</div>
+                    <hr>
+                    <div id="key-input-container">
+                        <input type="tel" class="textarea center" aria-label="pair-key-1" maxlength="1" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" autofocus contenteditable placeholder="" disabled>
+                        <input type="tel" class="textarea center" aria-label="pair-key-2" maxlength="1" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" contenteditable placeholder="" disabled>
+                        <input type="tel" class="textarea center" aria-label="pair-key-3" maxlength="1" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" contenteditable placeholder="" disabled>
+                        <input type="tel" class="textarea center" aria-label="pair-key-4" maxlength="1" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" contenteditable placeholder="" disabled>
+                        <input type="tel" class="textarea center" aria-label="pair-key-5" maxlength="1" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" contenteditable placeholder="" disabled>
+                        <input type="tel" class="textarea center" aria-label="pair-key-6" maxlength="1" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" contenteditable placeholder="" disabled>
+                    </div>
+                    <div class="font-subheading center text-center">Enter key from another device to continue.</div>
+                    <div class="center row-reverse">
+                        <button class="button" type="submit" disabled>Pair</button>
+                        <button class="button" type="button" close>Cancel</button>
+                    </div>
+                </x-paper>
+            </x-background>
+        </form>
+    </x-dialog>
+    <!-- Edit Paired Devices Dialog -->
+    <x-dialog id="edit-paired-devices-dialog">
+        <form action="#">
+            <x-background class="full center text-center">
+                <x-paper shadow="2">
+                    <h2 class="center">Edit Paired Devices</h2>
+                    <div class="paired-devices-wrapper"></div>
+                    <div class="font-subheading center">
+                        <p>Activate <u>auto-accept</u> to automatically accept all files sent from that device.</p>
+                    </div>
+                    <div class="center row-reverse">
+                        <button class="button" type="button" close>Close</button>
+                    </div>
+                </x-paper>
+            </x-background>
+        </form>
+    </x-dialog>
+    <!-- Receive Request Dialog -->
+    <x-dialog id="receive-request-dialog">
+        <x-background class="full center">
+            <x-paper shadow="2">
+                <h2 class="center"></h2>
+                <div class="center column file-description">
+                    <div>
+                        <span class="display-name"></span>
+                        <span>would like to share</span>
+                    </div>
+                    <div class="row file-name" >
+                        <span class="file-stem"></span>
+                        <span class="file-extension"></span>
+                    </div>
+                    <div class="row file-other">
+                    </div>
+                    <div class="row font-body2 file-size"></div>
+                </div>
+                <div class="center file-preview"></div>
+                <div class="center row-reverse">
+                    <button id="accept-request" class="button" title="ENTER" autofocus>Accept</button>
+                    <button id="decline-request" class="button" title="ESCAPE">Decline</button>
+                </div>
+            </x-paper>
+        </x-background>
+    </x-dialog>
+    <!-- Receive File Dialog -->
+    <x-dialog id="receive-file-dialog">
+        <x-background class="full center">
+            <x-paper shadow="2">
+                <h2 class="center"></h2>
+                <div class="center column file-description">
+                    <div>
+                        <span class="display-name"></span>
+                        <span>has sent</span>
+                    </div>
+                    <div class="row file-name" >
+                        <span class="file-stem"></span>
+                        <span class="file-extension"></span>
+                    </div>
+                    <div class="row file-other"></div>
+                    <div class="row font-body2 file-size"></div>
+                </div>
+                <div class="center file-preview"></div>
+                <div class="center row-reverse">
+                    <button id="share-btn" class="button" autofocus hidden>Share</button>
+                    <button id="download-btn" class="button" autofocus>Download</button>
+                    <button class="button" close>Close</button>
+                </div>
+            </x-paper>
+        </x-background>
+    </x-dialog>
+    <!-- Send Text Dialog -->
+    <x-dialog id="send-text-dialog">
+        <form action="#">
+            <x-background class="full center">
+                <x-paper shadow="2">
+                    <h2 class="text-center">Send Message</h2>
+                    <div class="dialog-subheader text-center">
+                        <span>Send a Message to</span>
+                        <span class="display-name"></span>
+                    </div>
+                    <div class="row-separator"></div>
+                    <div id="text-input" title="Message" class="textarea" role="textbox" autocapitalize="none" spellcheck="false" autofocus contenteditable></div>
+                    <div class="center row-reverse">
+                        <button class="button" type="submit" title="CTRL/⌘ + ENTER" disabled>Send</button>
+                        <button class="button" type="button" title="ESCAPE" close>Cancel</button>
+                    </div>
+                </x-paper>
+            </x-background>
+        </form>
+    </x-dialog>
+    <!-- Receive Text Dialog -->
+    <x-dialog id="receive-text-dialog">
+        <x-background class="full center">
+            <x-paper shadow="2">
+                <h2 class="text-center">Message Received</h2>
+                <div class="text-center dialog-subheader">
+                    <span class="display-name"></span>
+                    <span>has sent:</span>
+                </div>
+                <div class="row-separator"></div>
+                <div id="text"></div>
+                <div class="center row-reverse">
+                    <button id="copy" class="button" title="CTRL/⌘ + C">Copy</button>
+                    <button id="close" class="button" title="ESCAPE">Close</button>
+                </div>
+            </x-paper>
+        </x-background>
+    </x-dialog>
+    <!-- base64 Paste Dialog -->
+    <x-dialog id="base64-paste-dialog">
+        <x-background class="full center">
+            <x-paper shadow="2">
+                <button class="button center" id="base64-paste-btn" title="Paste">Tap here to paste files</button>
+                <div class="textarea" placeholder="Paste here to send files" title="CMD/⌘ + V" contenteditable hidden></div>
+                <button class="button center" close>Close</button>
+            </x-paper>
+        </x-background>
+    </x-dialog>
+    <!-- Toast -->
+    <div class="toast-container full center">
+        <x-toast id="toast" class="row" shadow="1"></x-toast>
+    </div>
+    <!-- About Page -->
+    <x-about id="about" class="full center column">
+        <header class="row-reverse fade-in">
+            <a href="#" class="close icon-button" aria-label="Close About PairDrop">
+                <svg class="icon">
+                    <use xlink:href="#close-icon" />
+                </svg>
+            </a>
+        </header>
+        <section class="center column fade-in">
+            <svg class="icon logo">
+                <use xlink:href="#wifi-tethering" />
+            </svg>
+            <div class="title-wrapper">
+                <h1>PairDrop</h1>
+                <div class="font-subheading">v1.7.6</div>
+            </div>
+            <div class="font-subheading">The easiest way to transfer files across devices</div>
+            <div class="row">
+                <a class="icon-button" target="_blank" href="https://github.com/schlagmichdoch/pairdrop" title="PairDrop on Github" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#github" />
+                    </svg>
+                </a>
+                <a class="icon-button" target="_blank" href="https://www.buymeacoffee.com/pairdrop" title="Buy me a coffee!" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#monetarization" />
+                    </svg>
+                </a>
+                <a class="icon-button" target="_blank" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fpairdrop.net%20by%20https%3A%2F%2Fgithub.com%2Fschlagmichdoch%2F&" title="Tweet about PairDrop" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#twitter" />
+                    </svg>
+                </a>
+                <a class="icon-button" target="_blank" href="https://github.com/schlagmichdoch/pairdrop/blob/master/docs/faq.md" title="Frequently asked questions" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#help-outline" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+        <x-background></x-background>
+    </x-about>
+    <canvas class="circles"></canvas>
+    <!-- SVG Icon Library -->
+    <svg style="display: none;">
+        <symbol id=wifi-tethering viewBox="0 0 24 24">
+            <path d="M12 11c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 2c0-3.31-2.69-6-6-6s-6 2.69-6 6c0 2.22 1.21 4.15 3 5.19l1-1.74c-1.19-.7-2-1.97-2-3.45 0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.48-.81 2.75-2 3.45l1 1.74c1.79-1.04 3-2.97 3-5.19zM12 3C6.48 3 2 7.48 2 13c0 3.7 2.01 6.92 4.99 8.65l1-1.73C5.61 18.53 4 15.96 4 13c0-4.42 3.58-8 8-8s8 3.58 8 8c0 2.96-1.61 5.53-4 6.92l1 1.73c2.99-1.73 5-4.95 5-8.65 0-5.52-4.48-10-10-10z"></path>
+        </symbol>
+        <symbol id=desktop-mac viewBox="0 0 24 24">
+            <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"></path>
+        </symbol>
+        <symbol id=phone-iphone viewBox="0 0 24 24">
+            <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"></path>
+        </symbol>
+        <symbol id=tablet-mac viewBox="0 0 24 24">
+            <path d="M18.5 0h-14C3.12 0 2 1.12 2 2.5v19C2 22.88 3.12 24 4.5 24h14c1.38 0 2.5-1.12 2.5-2.5v-19C21 1.12 19.88 0 18.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H4V3h15v16z"></path>
+        </symbol>
+        <symbol id=info-outline viewBox="0 0 24 24">
+            <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"></path>
+        </symbol>
+        <symbol id=close-icon viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+        </symbol>
+        <symbol id=help-outline viewBox="0 0 24 24">
+            <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"></path>
+        </symbol>
+        <symbol id="twitter">
+            <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z" />
+        </symbol>
+        <symbol id="github">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+        </symbol>
+        <g id="notifications">
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
+        </g>
+        <symbol id="homescreen">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M18 1.01L8 1c-1.1 0-2 .9-2 2v3h2V5h10v14H8v-1H6v3c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM10 15h2V8H5v2h3.59L3 15.59 4.41 17 10 11.41z" />
+            <path fill="none" d="M0 0h24v24H0V0z" />
+        </symbol>
+        <symbol id="monetarization">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" />
+        </symbol>
+        <symbol id="icon-theme-auto" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-54 -54 620 620"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>
+        </symbol>
+        <symbol id="icon-theme-light" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-54 -54 620 620"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>
+        </symbol>
+        <symbol id="icon-theme-dark" viewBox="0 0 24 24">
+         <rect fill="none" height="24" width="24"/><path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+        </symbol>
+        <symbol id="pair-device-icon" viewBox="0 0 640 512">
+            <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/>
+        </symbol>
+        <symbol id="edit-pair-devices-icon" viewBox="-159 25 640 512">
+            <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <!--! edited by @schlagmichdoch -->
+            <path d="M218,155.4c-56.5-56.5-148-56.5-204.5,0L-98.8,267.7c-56.5,56.5-56.5,148,0,204.5c50,50,128.8,56.5,186.3,15.4l1.6-1.1 c14.4-10.3,17.7-30.3,7.4-44.6s-30.3-17.7-44.6-7.4l-1.6,1.1c-32.1,22.9-76,19.3-103.8-8.6c-31.5-31.6-31.5-82.6,0-114.1L58.7,200.6 c31.5-31.5,82.5-31.5,114,0c15.8,15.8,23.8,36.7,23.6,57.6c7.9-8.3,18.9-13,30.6-13c4.5,0,8.9,0.7,13.2,2l17.4,5.5 c0.9-0.5,1.8-1,2.7-1.5C258.7,216.2,244.4,181.8,218,155.4z M420.8,86.6c-50-50-128.8-56.5-186.3-15.4l-1.6,1.1 c-14.4,10.3-17.7,30.3-7.4,44.6s30.3,17.7,44.6,7.4l1.6-1.1c32.1-22.9,76-19.3,103.8,8.6c25.8,25.8,30.5,64.7,14,95.2 c0.7,2,1.3,4,1.8,6.1l3.9,17.9c1.1,0.6,2.1,1.2,3.2,1.8l17.4-5.5c4.3-1.4,8.7-2,13.1-2c7.3,0,14.3,1.8,20.5,5.2 C474.7,196.8,465.1,130.9,420.8,86.6z M140.7,254.4l1.1-1.6c10.3-14.4,6.9-34.4-7.4-44.6s-34.4-6.9-44.6,7.4l-1.1,1.6 C47.5,274.6,54,353.4,104,403.4c18.7,18.7,41.2,31.2,65,37.5c-1.4-3.1-2.6-6.2-3.8-9.3c-6-16.4-1.5-34.6,11.6-46.4l7.2-6.6 c-12.7-3.6-24.7-10.5-34.8-20.5C121.4,330.3,117.8,286.4,140.7,254.4z"/>
+            <path d="M458.9,407.4l-24.3-22.1c0.6-4.7,1-9.4,1-14.2s-0.3-9.6-1-14.2l24.3-22.1c3.9-3.5,5.4-8.9,3.6-13.8v-0.1 c-2.5-6.7-5.4-13.1-8.9-19.2l-2.6-4.5c-3.7-6.2-7.8-12-12.4-17.5c-3.3-4-8.8-5.4-13.7-3.8l-31.2,9.9c-7.5-5.8-15.8-10.6-24.7-14.2 l-7-32c-1.1-5.1-5-9.1-10.2-10c-7.7-1.3-15.7-2-23.8-2s-16.1,0.7-23.8,2c-5.2,0.9-9.1,4.9-10.2,10l-7,32 c-8.9,3.7-17.2,8.5-24.7,14.2l-31.2-9.9c-4.9-1.6-10.4-0.2-13.7,3.8c-4.5,5.5-8.7,11.3-12.4,17.5l-2.6,4.5 c-3.4,6.2-6.4,12.6-8.9,19.2c-1.8,4.9-0.3,10.3,3.6,13.8l24.3,22.1c-0.6,4.7-1,9.4-1,14.2s0.3,9.6,1,14.3L197,407.5 c-3.9,3.5-5.4,8.9-3.6,13.8c2.5,6.7,5.4,13.1,8.9,19.2l2.6,4.5c3.7,6.2,7.8,12,12.4,17.5c3.3,4,8.8,5.4,13.7,3.8l31.2-10 c7.5,5.8,15.8,10.6,24.7,14.2l7,32c1.1,5.1,5,9.1,10.2,10c7.7,1.3,15.7,2,23.8,2c8.1,0,16.1-0.7,23.8-2c5.2-0.8,9.1-4.9,10.2-10 l7-32c8.9-3.6,17.2-8.5,24.7-14.2l31.2,9.9c4.9,1.6,10.4,0.2,13.7-3.8c4.5-5.5,8.7-11.3,12.4-17.5l2.6-4.5 c3.4-6.2,6.4-12.6,8.9-19.2C464.2,416.3,462.7,410.9,458.9,407.4z M328,415.9c-24.8,0-44.9-20.1-44.9-44.8 c0-24.8,20.1-44.8,44.9-44.8s44.8,20.1,44.8,44.8C372.8,395.9,352.7,415.9,328,415.9z"/>
+        </symbol>
+        <symbol id="edit-pen-icon" viewBox="0 0 512 512">
+            <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/>
+        </symbol>
+    </svg>
+    <!-- Scripts -->
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/network.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/util.js" async></script>
+    <script src="scripts/QRCode.min.js" async></script>
+    <script src="scripts/zip.min.js" async></script>
+    <script src="scripts/NoSleep.min.js" async></script>
+    <!-- Sounds -->
+    <audio id="blop" autobuffer="true">
+        <source src="sounds/blop.mp3" type="audio/mpeg">
+        <source src="sounds/blop.ogg" type="audio/ogg">
+    </audio>
+    <!-- no script -->
+    <noscript>
+        <x-noscript class="full center column">
+            <h1>Enable JavaScript</h1>
+            <h3>PairDrop works only with JavaScript</h3>
+        </x-noscript>
+    </noscript>
+</body>
