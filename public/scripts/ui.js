@@ -9,7 +9,7 @@ window.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 Events.on('display-name', e => {
     const me = e.detail.message;
     const $displayName = $('displayName')
-    $displayName.textContent = 'このデバイスの表示名: ' + me.displayName;
+    $displayName.textContent = me.displayName + ' として検出可能';
     $displayName.title = me.deviceName;
 });
 
