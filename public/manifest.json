@@ -2,6 +2,8 @@
     "name": "Snapdrop JP",
     "id": "/",
     "short_name": "Snapdrop JP",
+    "lang": "ja",
+    "dir": "ltr",
     "categories": ["productivity", "utilities"],
     "description": "画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有できるアプリ",
     "icons": [{
