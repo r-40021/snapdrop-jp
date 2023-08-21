@@ -5,7 +5,7 @@
     "lang": "ja",
     "dir": "ltr",
     "categories": ["productivity", "utilities"],
-    "description": "画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有できるアプリ",
+    "description": "画像、動画、PDF、URL 等を同一ネットワーク上の端末間で素早く安全に共有できるアプリ",
     "icons": [{
         "src": "images/android-chrome-192x192.png",
         "sizes": "192x192",
