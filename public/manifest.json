@@ -1,6 +1,8 @@
 {
     "name": "Snapdrop JP",
+    "id": "/",
     "short_name": "Snapdrop JP",
+    "categories": ["productivity", "utilities"],
     "description": "画像、動画、PDF、URLを同一ネットワーク上の端末間で素早く共有できるアプリ",
     "icons": [{
         "src": "images/android-chrome-192x192.png",
@@ -28,7 +30,11 @@
     "background_color": "#efefef",
     "start_url": "/",
     "display": "standalone",
+    "orientation": "natural",
     "theme_color": "#3367d6",
+    "launch_handler": {
+        "client_mode": "auto"
+    },    
     "share_target": {
         "method":"GET",
         "action": "/?share_target",
@@ -37,5 +43,30 @@
             "text": "text",
             "url": "url"
         }
-    }
+    },
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "screenshots" : [
+        {
+            "src": "images/screenshot-1.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshot-2.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshot-3.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        },
+        {
+            "src": "images/screenshot-4.jpg",
+            "sizes": "1080x2400",
+            "type": "image/jpg"
+        }
+    ]
 }
