@@ -568,6 +568,11 @@ button::-moz-focus-inner {
     margin: 8px 8px -16px;
 }
 
+/* MS Store Budge */
+ms-store-badge::part(img) {
+    height: 52px;
+    margin: 48px;
+}
 
 /* Loading Indicator */
 
