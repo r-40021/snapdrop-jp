@@ -569,9 +569,11 @@ button::-moz-focus-inner {
 }
 
 /* MS Store Budge */
+ms-store-badge {
+    margin: 40px;
+}
 ms-store-badge::part(img) {
     height: 52px;
-    margin: 48px;
 }
 
 /* Loading Indicator */
