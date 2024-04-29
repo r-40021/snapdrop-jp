@@ -13,7 +13,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "ua-parser-js": "^1.0.37",
-    "ws": "^8.16.0"
+    "ws": "^8.17.0"
   },
   "engines": {
     "node": "20.x"
