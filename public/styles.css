@@ -561,7 +561,7 @@ button::-moz-focus-inner {
 }
 
 #about:target x-background {
-    transform: scale(15);
+    transform: scale(12);
 }
 
 #about .row a {
@@ -745,9 +745,10 @@ x-dialog x-paper {
 }
 /* Image Preview */
 #img-preview{
-    max-width:100%;
-    max-height:100%;
-   
+    max-width: 100%;
+    max-height: 50vh;
+    margin: auto;
+    display: block;
 }
 
 
