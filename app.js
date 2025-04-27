@@ -58,9 +58,9 @@ function redirectToDomain(req, res, next) {
     }
 }
 
-app.all('*', forceHttps);
+app.all('*splat', forceHttps);
 
-app.all('*', redirectToDomain)
+app.all('*splat', redirectToDomain)
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index1.html');
