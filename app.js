@@ -63,7 +63,7 @@ app.all('*splat', forceHttps);
 app.all('*splat', redirectToDomain)
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index1.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 const server = http.createServer(app);
