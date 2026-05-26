@@ -620,7 +620,7 @@ __metadata:
   resolution: "snapdrop@workspace:."
   dependencies:
     express: ^5.2.1
-    ua-parser-js: ^2.0.9
+    ua-parser-js: ^2.0.10
     ws: ^8.18.3
   languageName: unknown
   linkType: soft
@@ -664,16 +664,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^2.0.9":
-  version: 2.0.9
-  resolution: "ua-parser-js@npm:2.0.9"
+"ua-parser-js@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "ua-parser-js@npm:2.0.10"
   dependencies:
     detect-europe-js: ^0.1.2
     is-standalone-pwa: ^0.1.1
     ua-is-frozen: ^0.1.2
   bin:
     ua-parser-js: script/cli.js
-  checksum: 439294022fe8f2847b8dc935f7cbcf058c433ed4abf418c08dcc7d79d194b6ee1233bcbb0a3a63c728daf07e76324ca827ac468257ffa88586ded828ace95eb6
+  checksum: 86ceaabff9cc7ae771ebea3e803480eb679f912145ddb8a8527ce067861b31f38d12ab8f6c671d9369eccd7fdbe6a1aaee24c866f1a6b27871a7ce177534a40c
   languageName: node
   linkType: hard
 
